@@ -27,7 +27,7 @@ const EditUserData = () => {
         try {
             const response = await axios.put(PUT_URL, editUserData, headers_)
             if (response.status === 200) {
-                navigate('/', { replace: true })
+                navigate('/userdata', { replace: true })
             }
             // alert(`The Response is: ${response.data.id},${response.data.firstName},${response.data.lastName}`);
         } catch (err) {

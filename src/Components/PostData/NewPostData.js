@@ -26,7 +26,7 @@ const NewPostData = () => {
         try {
             const response = await axios.post(POST_URL, newPostData, headers_)
             if (response.status === 200) {
-                navigate('/', { replace: true })
+                navigate('/postdata', { replace: true })
             }
             alert(`The Response is: ${response.data.id},${response.data.likes},${response.data.tags}`);
         } catch (err) {

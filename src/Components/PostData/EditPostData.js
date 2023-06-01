@@ -27,7 +27,7 @@ const EditPostData = () => {
         try {
             const response = await axios.put(PUT_URL, editPostData, headers_)
             if (response.status === 200) {
-                navigate('/', { replace: true })
+                navigate('/postdata', { replace: true })
             }
         } catch (err) {
             console.log(err)
@@ -74,7 +74,7 @@ const EditPostData = () => {
                     display='grid'
                     alignItems="center" justifyContent="center"
                 >
-                   <div >
+                    <div >
                         <TextField
                             label="Likes"
                             name="likes"
