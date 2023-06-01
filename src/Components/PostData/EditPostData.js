@@ -7,11 +7,11 @@ const EditPostData = () => {
     const { id } = useParams()
     const navigate = useNavigate();
     const [editPostData, setEditPostData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        title: "",
-        picture: "",
+        likes: "",
+        tags: "",
+        text: "",
+        owner: "",
+        image: "",
     });
 
     const handleInputs = (e) => {
@@ -74,49 +74,50 @@ const EditPostData = () => {
                     display='grid'
                     alignItems="center" justifyContent="center"
                 >
-                    <div >
+                   <div >
                         <TextField
-                            label="First Name"
-                            name="firstName"
-                            id="firstName"
+                            label="Likes"
+                            name="likes"
+                            id="likes"
+                            type={parseInt() === 'number'}
                             onChange={handleInputs}
-                            value={editPostData.firstName || ""}
+                            value={editPostData.likes || ""}
                         />
                     </div>
                     <div >
                         <TextField
-                            label="Last Name"
-                            name="lastName"
-                            id="lastName"
+                            label="Tags"
+                            name="tags"
+                            id="tags"
                             onChange={handleInputs}
-                            value={editPostData.lastName || ""}
+                            value={editPostData.tags || ""}
                         />
                     </div>
                     <div >
                         <TextField
-                            label="Email"
-                            name="email"
-                            id="email"
+                            label="Text"
+                            name="text"
+                            id="text"
                             onChange={handleInputs}
-                            value={editPostData.email || ""}
+                            value={editPostData.text || ""}
                         />
                     </div>
                     <div >
                         <TextField
-                            label="Title (mr/ms, mrs)"
-                            name="title"
-                            id="title"
+                            label="Owner ID "
+                            name="owner"
+                            id="owner"
                             onChange={handleInputs}
-                            value={editPostData.title || ""}
+                            value={editPostData.owner || ""}
                         />
                     </div>
                     <div >
                         <TextField
-                            label="Picture"
-                            name="picture"
-                            id="picture"
+                            label="Image"
+                            name="image"
+                            id="image"
                             onChange={handleInputs}
-                            value={editPostData.picture || ""}
+                            value={editPostData.image || ""}
                         />
                     </div>
                     <Button variant='contained' style={{ marginLeft: "10px" }}

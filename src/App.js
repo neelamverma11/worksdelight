@@ -7,6 +7,7 @@ import EditUserData from './Components/UserData/EditUserData';
 import ShowPostData from './Components/PostData/ShowPostData';
 import NewPostData from './Components/PostData/NewPostData';
 import EditPostData from './Components/PostData/EditPostData';
+import ViewOwnerPostData from './Components/PostData/ViewOwnerPostData';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/postdata' element={<ShowPostData />} />
           <Route path='/newpostdata' element={<NewPostData />} />
           <Route path='/editpostdata/:id' element={<EditPostData />} />
+          <Route path='/viewownerpostdata/:id' element={<ViewOwnerPostData />} />
         </Routes>
       </BrowserRouter>
     </>

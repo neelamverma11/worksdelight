@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Table, TableBody, Container, Paper, TableHead, TableRow, TableContainer, Button, Stack, Typography, Avatar } from '@mui/material';
+import { Table, TableBody, Container, Paper, TableHead, TableRow, TableContainer, Button, Stack, Typography, Avatar, ListItem } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const columns = [
-    { id: 'picture', label: 'Image', minWidth: 170 },
+    { id: 'image', label: 'Image', minWidth: 170 },
     { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'title', label: 'Title', minWidth: 100 },
-    { id: 'firstName', label: 'FirstName', minWidth: 50 },
-    { id: 'lastName', label: 'LastName', minWidth: 110 },
+    { id: 'like', label: 'Likes', minWidth: 100 },
+    { id: 'text', label: 'Text', minWidth: 50 },
+    { id: 'tags', label: 'Tags', minWidth: 110 },
     { id: '1' },
     { id: '2' },
+    { id: '3' },
 ];
 
 const ShowPostData = () => {
@@ -59,6 +60,9 @@ const ShowPostData = () => {
         }
     };
 
+    // tags mapping
+    const getPostTags = (tag) => tag.map((data, index) => <ListItem key={index}>{index + 1}.{data} </ListItem>)
+
     // delete api call
     const handleDelete = async () => {
         const DELETE_URL = `https://dummyapi.io/data/v1/post/${idToDelete.id}`;
@@ -69,7 +73,7 @@ const ShowPostData = () => {
             getUser();
         } catch (err) {
             toggle();
-            // console.log(err)
+            console.log(err)
         }
     }
 
@@ -108,20 +112,25 @@ const ShowPostData = () => {
                                         <StyledTableRow hover key={index} sx={{ hover: "none" }} >
                                             <StyledTableCell component="th" scope="row" padding="none">
                                                 <Stack direction="row" alignItems="center">
-                                                    <Avatar alt={post.name} src={post.owner.picture} sx={{ ml: 2 }} />
+                                                    <Avatar alt={post.name} src={post.image} sx={{ ml: 2 }} />
                                                 </Stack>
                                             </StyledTableCell>
-                                            <StyledTableCell align="left">{post.owner.id}</StyledTableCell>
-                                            <StyledTableCell align="left">{post.owner.title}</StyledTableCell>
-                                            <StyledTableCell align="left">{post.owner.firstName}</StyledTableCell>
-                                            <StyledTableCell align="left">{post.owner.lastName}</StyledTableCell>
+                                            <StyledTableCell align="left">{post.id}</StyledTableCell>
+                                            <StyledTableCell align="left">{post.likes}</StyledTableCell>
+                                            <StyledTableCell align="left">{post.text}</StyledTableCell>
+                                            <StyledTableCell align="left">{getPostTags(post.tags)}</StyledTableCell>
                                             <StyledTableCell>
-                                                <Link to={`/editpostdata/${post.owner.id}`}>
+                                                <Link to={`/viewownerpostdata/${post.id}`}>
+                                                    <Button variant='contained' sx={{ mt: 1 }}  >View Owner</Button>
+                                                </Link>
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                <Link to={`/editpostdata/${post.id}`}>
                                                     <Button variant='contained' sx={{ mt: 1 }}>Edit</Button>
                                                 </Link>
                                             </StyledTableCell>
                                             <StyledTableCell>
-                                                <Button variant='contained' sx={{ mt: 1 }} onClick={() => { setIdToDelete(post.owner); toggle(); }}
+                                                <Button variant='contained' sx={{ mt: 1 }} onClick={() => { setIdToDelete(post); toggle(); }}
                                                 >Delete</Button>
                                             </StyledTableCell>
                                         </StyledTableRow>
@@ -135,7 +144,7 @@ const ShowPostData = () => {
 
             {/* modal for delete item */}
             <Modal Modal isOpen={open} style={{ marginTop: '13rem' }} >
-                <ModalHeader toggle={toggle}>Post : {idToDelete.firstName}</ModalHeader>
+                <ModalHeader toggle={toggle}>Post : {idToDelete.id}</ModalHeader>
                 <ModalBody>Sure, You want to Delete? </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={toggle}>No</Button>
